@@ -2,18 +2,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Wine, Sparkles, Package, Gift, Plus, Minus, ArrowRight } from "lucide-react";
 import { products } from "@/data/products";
-
-const bottleTypes = [
-  { id: "sparkling", label: "Sparkling & Prosecco", icon: Sparkles },
-  { id: "champagne", label: "Champagne", icon: Wine },
-  { id: "spirits", label: "Premium Spirits", icon: Package },
-  { id: "divin", label: "Aged Divin", icon: Gift },
-];
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function BuildYourBoxPage() {
   const [selected, setSelected] = useState<Record<string, number>>({});
   const [giftNote, setGiftNote] = useState("");
   const [step, setStep] = useState(1);
+  const { t } = useLanguage();
+
+  const bottleTypes = [
+    { id: "sparkling", label: t("buildBox.sparklingProsecco"), icon: Sparkles },
+    { id: "champagne", label: t("buildBox.champagne"), icon: Wine },
+    { id: "spirits", label: t("buildBox.premiumSpirits"), icon: Package },
+    { id: "divin", label: t("buildBox.agedDivin"), icon: Gift },
+  ];
 
   const totalBottles = Object.values(selected).reduce((a, b) => a + b, 0);
   const selectedProducts = Object.entries(selected)
@@ -32,18 +34,20 @@ export default function BuildYourBoxPage() {
 
   const availableProducts = products.filter(p => p.category !== "Water");
 
+  const steps = [t("buildBox.selectBottles"), t("buildBox.preferences"), t("buildBox.review")];
+
   return (
     <div className="pt-24 pb-20">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">Custom Curation</p>
-          <h1 className="font-serif text-4xl lg:text-5xl text-foreground mb-4">Build Your Box</h1>
-          <p className="text-muted-foreground max-w-lg mx-auto">Select your favorite bottles, choose quantities, and create a personalized luxury box.</p>
+          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("buildBox.tag")}</p>
+          <h1 className="font-serif text-4xl lg:text-5xl text-foreground mb-4">{t("buildBox.title")}</h1>
+          <p className="text-muted-foreground max-w-lg mx-auto">{t("buildBox.desc")}</p>
         </motion.div>
 
         {/* Steps */}
         <div className="flex items-center justify-center gap-8 mb-12">
-          {["Select Bottles", "Preferences", "Review"].map((s, i) => (
+          {steps.map((s, i) => (
             <button key={s} onClick={() => setStep(i + 1)}
               className={`text-xs tracking-widest uppercase font-sans transition-colors ${step === i + 1 ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}
             >
@@ -57,7 +61,6 @@ export default function BuildYourBoxPage() {
           <div className="lg:col-span-2">
             {step === 1 && (
               <div className="space-y-4">
-                {/* Quick filters */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {bottleTypes.map(({ id, label, icon: Icon }) => (
                     <button key={id} className="flex items-center gap-2 px-4 py-2 bg-secondary text-muted-foreground text-xs tracking-wider uppercase font-sans rounded-sm hover:text-primary transition-colors">
@@ -93,9 +96,9 @@ export default function BuildYourBoxPage() {
             {step === 2 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-serif text-lg text-foreground mb-3">Delivery Frequency</h3>
+                  <h3 className="font-serif text-lg text-foreground mb-3">{t("buildBox.deliveryFrequency")}</h3>
                   <div className="grid grid-cols-3 gap-3">
-                    {["Monthly", "Bi-Monthly", "One-Time"].map(f => (
+                    {[t("buildBox.monthly"), t("buildBox.biMonthly"), t("buildBox.oneTime")].map(f => (
                       <button key={f} className="py-3 bg-secondary text-muted-foreground text-xs tracking-widest uppercase font-sans rounded-sm hover:bg-card hover:text-primary border border-border hover:border-primary transition-colors">
                         {f}
                       </button>
@@ -103,18 +106,18 @@ export default function BuildYourBoxPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg text-foreground mb-3">Gift Note (Optional)</h3>
+                  <h3 className="font-serif text-lg text-foreground mb-3">{t("buildBox.giftNoteOptional")}</h3>
                   <textarea
                     value={giftNote}
                     onChange={e => setGiftNote(e.target.value)}
-                    placeholder="Add a personal message..."
+                    placeholder={t("buildBox.addPersonalMessage")}
                     className="w-full bg-secondary text-foreground placeholder:text-muted-foreground p-4 rounded-sm border border-border focus:border-primary outline-none resize-none h-32 text-sm"
                   />
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg text-foreground mb-3">Wrapping</h3>
+                  <h3 className="font-serif text-lg text-foreground mb-3">{t("buildBox.wrapping")}</h3>
                   <div className="grid grid-cols-2 gap-3">
-                    {["Standard Box", "Premium Gift Wrap (+50 MDL)"].map(w => (
+                    {[t("buildBox.standardBox"), t("buildBox.premiumWrap")].map(w => (
                       <button key={w} className="py-3 bg-secondary text-muted-foreground text-xs tracking-widest uppercase font-sans rounded-sm hover:bg-card hover:text-primary border border-border hover:border-primary transition-colors">
                         {w}
                       </button>
@@ -126,9 +129,9 @@ export default function BuildYourBoxPage() {
 
             {step === 3 && (
               <div>
-                <h3 className="font-serif text-lg text-foreground mb-4">Your Box Summary</h3>
+                <h3 className="font-serif text-lg text-foreground mb-4">{t("buildBox.boxSummary")}</h3>
                 {selectedProducts.length === 0 ? (
-                  <p className="text-muted-foreground">No bottles selected yet. Go back to add some!</p>
+                  <p className="text-muted-foreground">{t("buildBox.noBottlesSelected")}</p>
                 ) : (
                   <div className="space-y-3">
                     {selectedProducts.map(({ product, qty }) => (
@@ -144,7 +147,7 @@ export default function BuildYourBoxPage() {
                     ))}
                     {giftNote && (
                       <div className="p-4 bg-secondary rounded-sm">
-                        <p className="text-muted-foreground text-xs tracking-widest uppercase font-sans mb-1">Gift Note</p>
+                        <p className="text-muted-foreground text-xs tracking-widest uppercase font-sans mb-1">{t("buildBox.giftNoteLabel")}</p>
                         <p className="text-foreground text-sm italic">"{giftNote}"</p>
                       </div>
                     )}
@@ -157,28 +160,28 @@ export default function BuildYourBoxPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-card rounded-sm border border-border p-6">
-              <h3 className="font-serif text-lg text-foreground mb-4">Your Box</h3>
+              <h3 className="font-serif text-lg text-foreground mb-4">{t("buildBox.yourBox")}</h3>
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Bottles</span>
+                  <span className="text-muted-foreground">{t("buildBox.bottlesLabel")}</span>
                   <span className="text-foreground">{totalBottles}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground">{t("buildBox.subtotal")}</span>
                   <span className="text-foreground">{totalPrice} MDL</span>
                 </div>
                 <div className="border-t border-border pt-3 flex justify-between">
-                  <span className="text-foreground font-sans font-medium">Total</span>
+                  <span className="text-foreground font-sans font-medium">{t("buildBox.total")}</span>
                   <span className="text-primary font-serif text-xl">{totalPrice} MDL</span>
                 </div>
               </div>
               {step < 3 ? (
                 <button onClick={() => setStep(step + 1)} className="w-full flex items-center justify-center gap-2 py-3 bg-primary text-primary-foreground text-xs tracking-widest uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors">
-                  Continue <ArrowRight size={14} />
+                  {t("buildBox.continue")} <ArrowRight size={14} />
                 </button>
               ) : (
                 <button className="w-full flex items-center justify-center gap-2 py-3 bg-primary text-primary-foreground text-xs tracking-widest uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors">
-                  Add to Cart <ArrowRight size={14} />
+                  {t("buildBox.addToCart")} <ArrowRight size={14} />
                 </button>
               )}
             </div>

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wine } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function AgeVerification() {
   const [show, setShow] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const verified = sessionStorage.getItem("age-verified");
@@ -31,23 +33,23 @@ export default function AgeVerification() {
             className="text-center max-w-md px-8"
           >
             <Wine className="text-primary mx-auto mb-6" size={48} />
-            <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-3">Welcome to Maison Élite</h1>
-            <p className="text-muted-foreground mb-8">You must be of legal drinking age in your country to enter this site.</p>
+            <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-3">{t("age.title")}</h1>
+            <p className="text-muted-foreground mb-8">{t("age.subtitle")}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={verify}
                 className="px-8 py-3 bg-primary text-primary-foreground font-sans text-sm tracking-widest uppercase hover:bg-primary/90 transition-colors rounded-sm"
               >
-                I Am 18 or Older
+                {t("age.confirm")}
               </button>
               <a
                 href="https://www.google.com"
                 className="px-8 py-3 border border-border text-muted-foreground font-sans text-sm tracking-widest uppercase hover:border-primary hover:text-primary transition-colors rounded-sm"
               >
-                I Am Under 18
+                {t("age.deny")}
               </a>
             </div>
-            <p className="text-muted-foreground/50 text-xs mt-8">By entering, you accept our Terms & Conditions and Privacy Policy.</p>
+            <p className="text-muted-foreground/50 text-xs mt-8">{t("age.terms")}</p>
           </motion.div>
         </motion.div>
       )}

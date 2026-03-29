@@ -2,14 +2,19 @@ import { Link } from "react-router-dom";
 import type { Product } from "@/data/products";
 import { ShoppingBag, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
+  const { t } = useLanguage();
+
   const badgeColors: Record<string, string> = {
     Bestseller: "bg-primary text-primary-foreground",
     Limited: "bg-accent text-accent-foreground",
     "Gift Pick": "bg-secondary text-secondary-foreground border border-primary/30",
     "Club Favorite": "bg-secondary text-primary border border-primary/20",
   };
+
+  const translatedBadge = product.badge ? t(`badges.${product.badge}`) : undefined;
 
   return (
     <motion.div
@@ -30,13 +35,13 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
 
           {product.badge && (
             <span className={`absolute top-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-sans font-medium rounded-sm ${badgeColors[product.badge] || "bg-secondary text-foreground"}`}>
-              {product.badge}
+              {translatedBadge}
             </span>
           )}
 
           <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
             <button className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary text-primary-foreground text-xs tracking-wider uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors">
-              <ShoppingBag size={14} /> Add
+              <ShoppingBag size={14} /> {t("product.add")}
             </button>
             <button className="px-3 py-2.5 bg-secondary/90 backdrop-blur-sm text-foreground rounded-sm hover:bg-secondary transition-colors">
               <Eye size={14} />

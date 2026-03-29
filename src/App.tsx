@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AgeVerification from "@/components/layout/AgeVerification";
@@ -23,31 +24,33 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AgeVerification />
-        <Header />
-        <main className="min-h-screen">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="/subscriptions" element={<SubscriptionPage />} />
-            <Route path="/build-your-box" element={<BuildYourBoxPage />} />
-            <Route path="/collections" element={<CollectionsIndex />} />
-            <Route path="/collections/:slug" element={<CollectionPage />} />
-            <Route path="/gifting" element={<GiftingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/account" element={<AccountPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    </TooltipProvider>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AgeVerification />
+          <Header />
+          <main className="min-h-screen">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/product/:id" element={<ProductDetailPage />} />
+              <Route path="/subscriptions" element={<SubscriptionPage />} />
+              <Route path="/build-your-box" element={<BuildYourBoxPage />} />
+              <Route path="/collections" element={<CollectionsIndex />} />
+              <Route path="/collections/:slug" element={<CollectionPage />} />
+              <Route path="/gifting" element={<GiftingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/account" element={<AccountPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Minus, Plus, X, Gift, ArrowRight, Truck, ShoppingBag } from "lucide-react";
 import { useState } from "react";
 import { products } from "@/data/products";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState([
@@ -11,6 +12,7 @@ export default function CartPage() {
   ]);
   const [giftNote, setGiftNote] = useState("");
   const [premiumWrap, setPremiumWrap] = useState(false);
+  const { t } = useLanguage();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.product.price * item.qty, 0);
   const wrapCost = premiumWrap ? 50 : 0;
@@ -28,10 +30,10 @@ export default function CartPage() {
     return (
       <div className="pt-32 pb-20 text-center">
         <ShoppingBag size={48} className="text-muted-foreground mx-auto mb-6" />
-        <h1 className="font-serif text-3xl text-foreground mb-4">Your Cart is Empty</h1>
-        <p className="text-muted-foreground mb-8">Discover our premium collection and add something extraordinary.</p>
+        <h1 className="font-serif text-3xl text-foreground mb-4">{t("cart.empty")}</h1>
+        <p className="text-muted-foreground mb-8">{t("cart.emptyDesc")}</p>
         <Link to="/shop" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans rounded-sm">
-          Start Shopping <ArrowRight size={14} />
+          {t("cart.startShopping")} <ArrowRight size={14} />
         </Link>
       </div>
     );
@@ -41,7 +43,7 @@ export default function CartPage() {
     <div className="pt-24 pb-20">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-10">Your Cart</h1>
+          <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-10">{t("cart.title")}</h1>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -71,7 +73,7 @@ export default function CartPage() {
 
             {/* Upsells */}
             <div className="mt-8">
-              <p className="text-muted-foreground text-xs tracking-widest uppercase font-sans mb-4">Complete your order</p>
+              <p className="text-muted-foreground text-xs tracking-widest uppercase font-sans mb-4">{t("cart.completeOrder")}</p>
               <div className="grid grid-cols-2 gap-3">
                 {products.filter(p => p.category === "Water").slice(0, 2).map(p => (
                   <div key={p.id} className="flex items-center gap-3 p-3 bg-secondary rounded-sm border border-border hover:border-primary/30 cursor-pointer transition-colors">
@@ -90,12 +92,12 @@ export default function CartPage() {
             <div className="mt-6">
               <div className="flex items-center gap-2 mb-3">
                 <Gift size={14} className="text-primary" />
-                <p className="text-foreground text-sm">Add a gift note</p>
+                <p className="text-foreground text-sm">{t("cart.addGiftNote")}</p>
               </div>
               <textarea
                 value={giftNote}
                 onChange={e => setGiftNote(e.target.value)}
-                placeholder="Write your personal message..."
+                placeholder={t("cart.writeMessage")}
                 className="w-full bg-secondary text-foreground placeholder:text-muted-foreground p-4 rounded-sm border border-border focus:border-primary outline-none resize-none h-24 text-sm"
               />
             </div>
@@ -104,15 +106,15 @@ export default function CartPage() {
           {/* Summary */}
           <div>
             <div className="sticky top-24 bg-card border border-border rounded-sm p-6">
-              <h3 className="font-serif text-lg text-foreground mb-6">Order Summary</h3>
+              <h3 className="font-serif text-lg text-foreground mb-6">{t("cart.orderSummary")}</h3>
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm"><span className="text-muted-foreground">Subtotal</span><span className="text-foreground">{subtotal} MDL</span></div>
+                <div className="flex justify-between text-sm"><span className="text-muted-foreground">{t("cart.subtotal")}</span><span className="text-foreground">{subtotal} MDL</span></div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Delivery</span>
-                  <span className={deliveryFree ? "text-primary" : "text-foreground"}>{deliveryFree ? "Free" : "50 MDL"}</span>
+                  <span className="text-muted-foreground">{t("cart.delivery")}</span>
+                  <span className={deliveryFree ? "text-primary" : "text-foreground"}>{deliveryFree ? t("cart.free") : "50 MDL"}</span>
                 </div>
                 <label className="flex items-center justify-between text-sm cursor-pointer">
-                  <span className="text-muted-foreground">Premium wrapping</span>
+                  <span className="text-muted-foreground">{t("cart.premiumWrapping")}</span>
                   <div className="flex items-center gap-2">
                     <span className="text-foreground">+50 MDL</span>
                     <input type="checkbox" checked={premiumWrap} onChange={e => setPremiumWrap(e.target.checked)}
@@ -120,7 +122,7 @@ export default function CartPage() {
                   </div>
                 </label>
                 <div className="border-t border-border pt-3 flex justify-between">
-                  <span className="text-foreground font-sans font-medium">Total</span>
+                  <span className="text-foreground font-sans font-medium">{t("cart.total")}</span>
                   <span className="text-primary font-serif text-xl">{total} MDL</span>
                 </div>
               </div>
@@ -128,15 +130,15 @@ export default function CartPage() {
               {!deliveryFree && (
                 <div className="flex items-center gap-2 text-muted-foreground text-xs mb-6">
                   <Truck size={14} className="text-primary" />
-                  <span>Add {500 - subtotal} MDL more for free delivery</span>
+                  <span>{t("cart.addMore").replace("{amount}", String(500 - subtotal))}</span>
                 </div>
               )}
 
               <button className="w-full py-3.5 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors mb-3">
-                Proceed to Checkout
+                {t("cart.checkout")}
               </button>
               <Link to="/shop" className="w-full flex items-center justify-center gap-2 py-3 text-muted-foreground text-xs tracking-widest uppercase font-sans hover:text-foreground transition-colors">
-                Continue Shopping
+                {t("cart.continueShopping")}
               </Link>
             </div>
           </div>
