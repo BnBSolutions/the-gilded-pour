@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, ShoppingBag, User, Menu, X, Wine } from "lucide-react";
+import { Search, ShoppingBag, User, Menu, X, Wine, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useTheme } from "@/i18n/ThemeContext";
 import type { Lang } from "@/i18n/translations";
 
 const navLinks = [
@@ -23,6 +24,7 @@ export default function Header() {
   const [cartCount] = useState(2);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -81,6 +83,9 @@ export default function Header() {
                   </button>
                 ))}
               </div>
+              <button onClick={toggleTheme} className="p-2 text-muted-foreground hover:text-primary transition-colors" aria-label="Toggle theme">
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
               <button onClick={() => setSearchOpen(!searchOpen)} className="p-2 text-muted-foreground hover:text-primary transition-colors">
                 <Search size={18} />
               </button>
