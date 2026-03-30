@@ -193,23 +193,23 @@ function Bestsellers() {
 function GiftSection() {
   const { t } = useLanguage();
   return (
-    <section className="py-20 lg:py-28 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-14 md:py-20 lg:py-28 bg-secondary">
+      <div className="container mx-auto px-5 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="order-2 lg:order-1">
             <div className="relative aspect-[4/3] rounded-sm overflow-hidden premium-shadow">
               <img src={giftingImg} alt="Premium gift packaging" className="w-full h-full object-cover" loading="lazy" width={800} height={600} />
             </div>
           </motion.div>
           <motion.div {...fadeUp} className="order-1 lg:order-2">
-            <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-4">{t("home.artOfGiving")}</p>
-            <h2 className="font-serif text-3xl lg:text-5xl text-foreground mb-6">{t("home.giftTitle")}</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">{t("home.giftDesc")}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/gifting" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors">
+            <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3 md:mb-4">{t("home.artOfGiving")}</p>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-foreground mb-4 md:mb-6">{t("home.giftTitle")}</h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 md:mb-8">{t("home.giftDesc")}</p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Link to="/gifting" className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3.5 md:py-4 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans rounded-sm hover:bg-primary/90 transition-colors">
                 {t("home.shopGifts")} <ArrowRight size={16} />
               </Link>
-              <Link to="/subscriptions" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-foreground text-sm tracking-widest uppercase font-sans rounded-sm hover:border-primary hover:text-primary transition-colors">
+              <Link to="/subscriptions" className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3.5 md:py-4 border border-border text-foreground text-sm tracking-widest uppercase font-sans rounded-sm hover:border-primary hover:text-primary transition-colors">
                 {t("home.giftSubscription")}
               </Link>
             </div>
