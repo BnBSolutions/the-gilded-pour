@@ -108,14 +108,14 @@ function CategoryCards() {
 function SubscriptionSection() {
   const { t } = useLanguage();
   return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="py-14 md:py-20 lg:py-28">
+      <div className="container mx-auto px-5 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <motion.div {...fadeUp}>
-            <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-4">{t("home.monthlyCuration")}</p>
-            <h2 className="font-serif text-3xl lg:text-5xl text-foreground mb-6">{t("home.clubTitle")}</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">{t("home.clubDesc")}</p>
-            <ul className="space-y-4 mb-10">
+            <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3 md:mb-4">{t("home.monthlyCuration")}</p>
+            <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl text-foreground mb-4 md:mb-6">{t("home.clubTitle")}</h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 md:mb-8">{t("home.clubDesc")}</p>
+            <ul className="space-y-3 md:space-y-4 mb-8 md:mb-10">
               {[
                 { icon: Crown, textKey: "home.clubBenefits.access" },
                 { icon: Gift, textKey: "home.clubBenefits.packaging" },
@@ -127,7 +127,7 @@ function SubscriptionSection() {
                 </li>
               ))}
             </ul>
-            <Link to="/subscriptions" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans hover:bg-primary/90 transition-colors rounded-sm">
+            <Link to="/subscriptions" className="inline-flex items-center gap-2 px-6 md:px-8 py-3.5 md:py-4 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-sans hover:bg-primary/90 transition-colors rounded-sm">
               {t("home.explorePlans")} <ArrowRight size={16} />
             </Link>
           </motion.div>
