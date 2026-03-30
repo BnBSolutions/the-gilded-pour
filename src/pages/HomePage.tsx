@@ -53,16 +53,16 @@ function FeaturedBottles() {
   const { t } = useLanguage();
   const featured = getFeaturedProducts();
   return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
-        <motion.div {...fadeUp} className="text-center mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.curatedSelection")}</p>
-          <h2 className="font-serif text-3xl lg:text-4xl text-foreground">{t("home.editorsPicks")}</h2>
+    <section className="py-14 md:py-20 lg:py-28">
+      <div className="container mx-auto px-5 lg:px-8">
+        <motion.div {...fadeUp} className="text-center mb-10 md:mb-14">
+          <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.curatedSelection")}</p>
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">{t("home.editorsPicks")}</h2>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8">
           {featured.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
         </div>
-        <motion.div {...fadeUp} className="text-center mt-12">
+        <motion.div {...fadeUp} className="text-center mt-10 md:mt-12">
           <Link to="/shop" className="inline-flex items-center gap-2 text-primary text-sm tracking-widest uppercase font-sans hover:text-gold-light transition-colors">
             {t("home.viewAllBottles")} <ArrowRight size={14} />
           </Link>
