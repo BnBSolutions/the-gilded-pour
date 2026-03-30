@@ -248,9 +248,9 @@ function Testimonials() {
 
 function LifestyleStrip() {
   return (
-    <section className="py-20 lg:py-28 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <section className="py-14 md:py-20 lg:py-28 bg-secondary">
+      <div className="container mx-auto px-5 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
           {[lifestyleImg, giftingImg, subscriptionHero, heroBg].map((img, i) => (
             <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }} className="aspect-square rounded-sm overflow-hidden">
               <img src={img} alt="Lifestyle" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
