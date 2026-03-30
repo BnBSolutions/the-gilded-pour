@@ -129,7 +129,7 @@
     background: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)), hsl(var(--gold-light)));
   }
   .gradient-dark {
-    background: linear-gradient(180deg, hsl(30 10% 4%), hsl(30 10% 8%));
+    background: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
   }
   .font-serif {
     font-family: var(--font-serif);
