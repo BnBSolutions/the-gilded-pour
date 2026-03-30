@@ -24,6 +24,7 @@ export default function Header() {
   const [cartCount] = useState(2);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
