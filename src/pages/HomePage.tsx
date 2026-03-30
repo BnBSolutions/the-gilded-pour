@@ -75,13 +75,13 @@ function FeaturedBottles() {
 function CategoryCards() {
   const { lang, t } = useLanguage();
   return (
-    <section className="py-20 lg:py-28 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
-        <motion.div {...fadeUp} className="text-center mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.explore")}</p>
-          <h2 className="font-serif text-3xl lg:text-4xl text-foreground">{t("home.ourCollections")}</h2>
+    <section className="py-14 md:py-20 lg:py-28 bg-secondary">
+      <div className="container mx-auto px-5 lg:px-8">
+        <motion.div {...fadeUp} className="text-center mb-10 md:mb-14">
+          <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.explore")}</p>
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">{t("home.ourCollections")}</h2>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
           {categories.slice(0, 7).map((cat, i) => {
             const catNameKey = `categories.${cat.name}` as string;
             const translatedName = t(catNameKey);
@@ -91,9 +91,9 @@ function CategoryCards() {
                 <Link to={`/collections/${cat.slug}`} className="group relative block aspect-[3/4] rounded-sm overflow-hidden">
                   <img src={cat.image} alt={displayName} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="font-serif text-lg text-foreground mb-1">{displayName}</h3>
-                    <p className="text-muted-foreground text-xs tracking-wider uppercase font-sans">{cat.count} {t("home.bottles")}</p>
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5">
+                    <h3 className="font-serif text-sm md:text-lg text-foreground mb-0.5 md:mb-1">{displayName}</h3>
+                    <p className="text-muted-foreground text-[10px] md:text-xs tracking-wider uppercase font-sans">{cat.count} {t("home.bottles")}</p>
                   </div>
                 </Link>
               </motion.div>
