@@ -176,13 +176,13 @@ function Bestsellers() {
   const { t } = useLanguage();
   const best = products.filter(p => p.badge === "Bestseller" || p.badge === "Club Favorite").slice(0, 4);
   return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
-        <motion.div {...fadeUp} className="text-center mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.mostLoved")}</p>
-          <h2 className="font-serif text-3xl lg:text-4xl text-foreground">{t("home.bestsellers")}</h2>
+    <section className="py-14 md:py-20 lg:py-28">
+      <div className="container mx-auto px-5 lg:px-8">
+        <motion.div {...fadeUp} className="text-center mb-10 md:mb-14">
+          <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.mostLoved")}</p>
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">{t("home.bestsellers")}</h2>
         </motion.div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
           {best.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
         </div>
       </div>
