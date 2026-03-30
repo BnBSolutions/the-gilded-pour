@@ -224,20 +224,20 @@ function Testimonials() {
   const { lang, t } = useLanguage();
   const reviews = translations.testimonialsList;
   return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
-        <motion.div {...fadeUp} className="text-center mb-14">
-          <p className="text-primary text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.testimonials")}</p>
-          <h2 className="font-serif text-3xl lg:text-4xl text-foreground">{t("home.whatMembersSay")}</h2>
+    <section className="py-14 md:py-20 lg:py-28">
+      <div className="container mx-auto px-5 lg:px-8">
+        <motion.div {...fadeUp} className="text-center mb-10 md:mb-14">
+          <p className="text-primary text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans mb-3">{t("home.testimonials")}</p>
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground">{t("home.whatMembersSay")}</h2>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
           {reviews.map((r, i) => (
-            <motion.div key={r.name} {...fadeUp} transition={{ delay: i * 0.1 }} className="bg-secondary rounded-sm p-8">
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: 5 }).map((_, j) => <Star key={j} size={14} className="fill-primary text-primary" />)}
+            <motion.div key={r.name} {...fadeUp} transition={{ delay: i * 0.1 }} className="bg-secondary rounded-sm p-5 md:p-8">
+              <div className="flex gap-1 mb-3 md:mb-4">
+                {Array.from({ length: 5 }).map((_, j) => <Star key={j} size={12} className="fill-primary text-primary md:w-3.5 md:h-3.5" />)}
               </div>
-              <p className="text-foreground text-sm leading-relaxed mb-6 italic">"{r.text[lang]}"</p>
-              <p className="text-muted-foreground text-xs tracking-wider uppercase font-sans">{r.name}</p>
+              <p className="text-foreground text-xs md:text-sm leading-relaxed mb-4 md:mb-6 italic">"{r.text[lang]}"</p>
+              <p className="text-muted-foreground text-[10px] md:text-xs tracking-wider uppercase font-sans">{r.name}</p>
             </motion.div>
           ))}
         </div>
