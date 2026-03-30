@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, Gift, Truck, Wine, Crown, Sparkles, Shield } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import heroMobile from "@/assets/hero-mobile.jpg";
 import subscriptionHero from "@/assets/subscription-hero.jpg";
 import lifestyleImg from "@/assets/lifestyle-1.jpg";
 import giftingImg from "@/assets/gifting.jpg";
