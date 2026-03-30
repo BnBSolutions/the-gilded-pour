@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, ShoppingBag, User, Menu, X, Wine } from "lucide-react";
+import { Search, ShoppingBag, User, Menu, X, Wine, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useTheme } from "@/i18n/ThemeContext";
 import type { Lang } from "@/i18n/translations";
 
 const navLinks = [
