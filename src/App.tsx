@@ -65,6 +65,7 @@ const App = () => (
         </HashRouter>
       </TooltipProvider>
     </LanguageProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
